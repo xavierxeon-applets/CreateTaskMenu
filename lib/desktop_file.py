@@ -45,6 +45,17 @@ class DesktopFile:
       self.config.set(DesktopFile.sectionName, 'Terminal', 'false')
       self.config.set(DesktopFile.sectionName, 'Type', 'Application')
 
+      """
+      echo "[Desktop Entry]" > $DEKTOP_FILE
+      echo "Name=SDKUpdater2" >> $DEKTOP_FILE
+      echo "Exec=/usr/local/SDKUpdater2/SDKUpdaterUI" >> $DEKTOP_FILE
+      echo "Path=/usr/local/SDKUpdater2" >> $DEKTOP_FILE
+      echo "Icon=/usr/local/SDKUpdater2/SDKUpdater.svg" >> $DEKTOP_FILE
+      echo "Terminal=false" >> $DEKTOP_FILE
+      echo "Type=Application" >> $DEKTOP_FILE
+      echo "Categories=Development;" >> $DEKTOP_FILE
+      """
+
    def write(self):
 
       print(self.config, self.fileName)
@@ -53,6 +64,11 @@ class DesktopFile:
          self.config.write(outfile)
 
       print('sudo update-desktop-database')
+      """
+      echo "if hash desktop-file-install 2>/dev/null; then" >> $CONTROL_DIR/postinst
+      echo "desktop-file-install /usr/share/applications/SDKUpdater2.desktop" >> $CONTROL_DIR/postinst
+      echo "fi" >> $CONTROL_DIR/postinst
+      """
 
    @staticmethod
    def findOrCreate(exeName):

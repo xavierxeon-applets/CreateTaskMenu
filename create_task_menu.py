@@ -17,17 +17,6 @@ def signit_handler(*args):
 
 def main():
 
-   if len(sys.argv) != 2:
-      print('need to supply name to executable')
-      return
-
-   exeName = sys.argv[1]
-   exeName = os.path.abspath(exeName)
-
-   if not os.path.exists(exeName):
-      print('executable does not exist:', exeName)
-      return
-
    app = QApplication([])
 
    app.setOrganizationName('SDU LSP')
@@ -39,7 +28,7 @@ def main():
    timer.start(500)
    timer.timeout.connect(lambda: None)  # Let the interpreter run each 500 ms.
 
-   mw = MainWidget(exeName)
+   mw = MainWidget()
    mw.show()
 
    sys.exit(app.exec())
