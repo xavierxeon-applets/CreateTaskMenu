@@ -22,10 +22,6 @@ class MainWidget(QWidget):
       self.ui.iconSelectButton.clicked.connect(self._selectIcon)
       self.ui.createButton.clicked.connect(self._createEntry)
 
-      self.ui.nameEdit.setText('UE5 Editor')
-      self.ui.exeEdit.setText('/media/veracrypt1/Devel/UE5/Engine/Binaries/Linux/UnrealEditor')
-      self.ui.iconEdit.setText('/media/veracrypt1/Devel/UE5/Engine/Content/Editor/Slate/About/UnrealLogo.svg')
-
       self._setIconPreview()
 
    def _selectExe(self):
@@ -39,7 +35,13 @@ class MainWidget(QWidget):
 
    def _selectIcon(self):
 
-      print('select icon', self.ui.iconEdit.text())
+      iconFileName = QFileDialog.getOpenFileName(self, 'Icon')
+      iconFileName = iconFileName[0]
+      if not iconFileName:
+         return
+
+      self.ui.iconEdit.setText(iconFileName)
+      self._setIconPreview()
 
    def _setIconPreview(self):
 
