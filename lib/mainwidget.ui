@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>582</width>
-    <height>160</height>
+    <height>159</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,6 +32,9 @@
     <widget class="QCommandLinkButton" name="createButton">
      <property name="text">
       <string>Create Desktop Entry</string>
+     </property>
+     <property name="description">
+      <string>execute update command from clipboard!</string>
      </property>
     </widget>
    </item>

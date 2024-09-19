@@ -2,7 +2,14 @@
 
 from configparser import ConfigParser, InterpolationSyntaxError
 import os
+import sys
 from pathlib import Path
+
+try:
+   import clipboard
+except ModuleNotFoundError:
+   print('pip3 install --user clipboard')
+   sys.exit(1)
 
 
 class DesktopFile:
@@ -35,6 +42,14 @@ class DesktopFile:
 
       print(self.fileName, self.exeName)
 
+   def setIcon(self, iconFileName):
+
+      self.config.set(DesktopFile.sectionName, 'Icon', iconFileName)
+
+   def setCategory(self, category):
+
+      self.config.set(DesktopFile.sectionName, 'Categories', category)
+
    def create(self, exeName, fileName):
 
       self.config.add_section(DesktopFile.sectionName)
@@ -45,35 +60,19 @@ class DesktopFile:
       self.config.set(DesktopFile.sectionName, 'Terminal', 'false')
       self.config.set(DesktopFile.sectionName, 'Type', 'Application')
 
-      """
-      echo "[Desktop Entry]" > $DEKTOP_FILE
-      echo "Name=SDKUpdater2" >> $DEKTOP_FILE
-      echo "Exec=/usr/local/SDKUpdater2/SDKUpdaterUI" >> $DEKTOP_FILE
-      echo "Path=/usr/local/SDKUpdater2" >> $DEKTOP_FILE
-      echo "Icon=/usr/local/SDKUpdater2/SDKUpdater.svg" >> $DEKTOP_FILE
-      echo "Terminal=false" >> $DEKTOP_FILE
-      echo "Type=Application" >> $DEKTOP_FILE
-      echo "Categories=Development;" >> $DEKTOP_FILE
-      """
-
    def write(self):
-
-      print(self.config, self.fileName)
 
       with open(self.fileName, 'w') as outfile:
          self.config.write(outfile)
 
-      print('sudo update-desktop-database')
-      """
-      echo "if hash desktop-file-install 2>/dev/null; then" >> $CONTROL_DIR/postinst
-      echo "desktop-file-install /usr/share/applications/SDKUpdater2.desktop" >> $CONTROL_DIR/postinst
-      echo "fi" >> $CONTROL_DIR/postinst
-      """
+      cmd = f'sudo desktop-file-install {self.fileName}'
+      clipboard.copy(cmd)
+      # print('sudo update-desktop-database')
 
    @staticmethod
    def findOrCreate(exeName):
 
-      print(exeName)
+      # print(exeName)
 
       for entry in os.scandir(DesktopFile.folderPath):
          if not entry.is_file():

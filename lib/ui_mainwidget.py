@@ -22,7 +22,7 @@ class Ui_MainWidget(object):
     def setupUi(self, MainWidget):
         if not MainWidget.objectName():
             MainWidget.setObjectName(u"MainWidget")
-        MainWidget.resize(582, 160)
+        MainWidget.resize(582, 159)
         self.gridLayout = QGridLayout(MainWidget)
         self.gridLayout.setObjectName(u"gridLayout")
         self.iconInfo = QLabel(MainWidget)
@@ -86,6 +86,7 @@ class Ui_MainWidget(object):
         self.iconInfo.setText(QCoreApplication.translate("MainWidget", u"Icon", None))
         self.iconSelectButton.setText(QCoreApplication.translate("MainWidget", u"...", None))
         self.createButton.setText(QCoreApplication.translate("MainWidget", u"Create Desktop Entry", None))
+        self.createButton.setDescription(QCoreApplication.translate("MainWidget", u"execute update command from clipboard!", None))
         self.exeSelectButton.setText(QCoreApplication.translate("MainWidget", u"...", None))
         self.exeInfo.setText(QCoreApplication.translate("MainWidget", u"Executable", None))
         self.iconPreview.setText(QCoreApplication.translate("MainWidget", u"TextLabel", None))

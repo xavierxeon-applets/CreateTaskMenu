@@ -52,6 +52,8 @@ class MainWidget(QWidget):
 
       exeFileName = self.ui.exeEdit.text()
       iconFileName = self.ui.iconEdit.text()
-      print('create entry', exeFileName, iconFileName)
-      # self.file = DesktopFile.findOrCreate(exeName)
-      # self.file.write()
+
+      self.file = DesktopFile.findOrCreate(exeFileName)
+      if iconFileName:
+         self.file.setIcon(iconFileName)
+      self.file.write()
